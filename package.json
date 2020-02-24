@@ -23,6 +23,7 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
-        "v-calendar": "^1.0.0-beta.23"
+        "v-calendar": "^1.0.0-beta.23",
+        "vue-router": "^3.1.5"
     }
 }

@@ -1,16 +1,29 @@
 <template>
   <div id="app">
-    <calendar/>
+      <header>
+        <Navbar />
+      </header>
+      <main>
+          <div class="container">
+                <RouterView />
+          </div>
+      </main>
+      <Footer />
   </div>
 </template>
 
 
 <script>
 import calendar from './components/Calendar.vue'
+import Navbar from './components/Navbar.vue'
+import Footer from './components/Footer.vue'
+
 export default {
     name: 'app',
     components: {
-        calendar
+        calendar,
+        Navbar,
+        Footer
     }
 }
 </script>
