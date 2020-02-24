@@ -1,8 +1,21 @@
 <template>
     <footer class="footer">
-        <button class="button button--link">logout</button>
+        <button class="button button--link" @click="logout">logout</button>
         <RouterLink class="button button--link" to="/">
             Login / Register
         </RouterLink>
     </footer>
 </template>
+
+
+<script>
+export default {
+    methods: {
+        async logout () {
+            await this.$store.dispatch('auth/logout')
+
+            this.$router.push('/login')
+        }
+    }
+}
+</script>
