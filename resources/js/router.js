@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 
 import Login from './pages/Login.vue'
 import Calender from './components/Calendar.vue'
+import store from './store'
+import SystemError from './pages/errors/System.vue'
 
 // これによってVueプラグインを使用する事ができる。
 //　これによって<RouterView />コンポーネントなどをしようする事ができる
@@ -15,7 +17,18 @@ const routes = [
     },
     {
         path: '/login',
-        component: Login
+        component: Login,
+        beforeEnter(to, from, next) {
+            if (store.getters['auth/check']) {
+                next('/')
+            } else {
+                next()
+            }
+        }
+    },
+    {
+        path: '/500',
+        component: SystemError
     }
 ]
 

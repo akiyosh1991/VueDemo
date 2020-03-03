@@ -8,11 +8,17 @@ import store from './store'
 
 Vue.use(VCalendar)
 
-new Vue({
-    el: '#app',
-    router,
-    store,
-    components: { App },
-    template: '<App />',
-    render: h => h(App),
-}).$mount('#app')
+const createApp = async () => {
+    await store.dispatch('auth/currentUser')
+    new Vue({
+        el: '#app',
+        router,
+        store,
+        components: { App },
+        template: '<App />',
+        render: h => h(App),
+    }).$mount('#app')
+}
+
+createApp()
+
