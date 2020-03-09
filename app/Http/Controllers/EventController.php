@@ -4,21 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Event;
+use App\Services\Event\EventService;
 
 class EventController extends Controller
 {
-    public function create(Request $data)
+    public function __construct(EventService $eventService)
     {
-        $event = new Event;
+        $this->eventService = $eventService;
+    }
 
-        $event->create([
-             'user_id' => $data['user_id'],
-             'name' => $data['name'],
-             'date' => $data['date'],
-             'place' => $data['place'],
-             'description' => $data['description'],
-         ]);
+    public function create(Request $request)
+    {
+        $response = $this->eventService->storeEvent($request);
 
-        return response($event['user_id'], 201)->header('Content-Type', 'text/plain');
+        return response($response['user_id'], 201)->header('Content-Type', 'text/plain');
     }
 }

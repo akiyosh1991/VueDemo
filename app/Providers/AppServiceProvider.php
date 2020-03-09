@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\Event\DummyEventRepository;
+use App\Repositories\Event\EventRepository;
+use App\Repositories\Event\EventRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +16,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if (\App::environment('testing')) {
+            $this->app->bind(EventRepositoryInterface::class, DummyEventRepository::class);
+        } else {
+            $this->app->bind(EventRepositoryInterface::class, EventRepository::class);
+        }
     }
 
     /**
