@@ -17,10 +17,12 @@ class CreateEventsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('name')->nullable();
-            $table->date('date')->nullable();
-            $table->string('place');
-            $table->longText('description');
+            $table->string('name');
+            $table->date('date');
+            $table->string('place')->nullable();
+            ;
+            $table->longText('description')->nullable();
+            ;
             $table->timestamps();
         });
     }
