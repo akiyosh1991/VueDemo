@@ -14,6 +14,11 @@ class EventService
         $this->eventRepository = $eventRepository;
     }
 
+    public function index()
+    {
+        return $this->eventRepository->index();
+    }
+
     public function storeEvent(Request $request)
     {
         return $this->eventRepository->storeEvent($request);

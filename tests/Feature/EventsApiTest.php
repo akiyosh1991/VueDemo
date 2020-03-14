@@ -41,4 +41,27 @@ class EventsApiTest extends TestCase
         $response = $this->postJson(route('event.create'), $data);
         $response->assertStatus(201);
     }
+
+    /**
+     * イベント情報取得APIテスト
+     *
+     * @test
+     */
+    public function should_配列形式のイベントを取得する()
+    {
+        factory(Event::class, 5)->create();
+
+        $response = $this->json('GET', route('event.index'));
+        $events = Event::with(['user'])->orderBy('date', 'desc')->get();
+
+        $expected_data = $events->map(function ($event) {
+            return [
+                'id' => $event->id,
+                'name' => $event->name,
+                'date' => $event->date
+            ];
+        })->all();
+        $response->assertStatus(200)
+            ->assertJsonCount(5);
+    }
 }

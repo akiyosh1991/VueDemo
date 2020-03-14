@@ -13,6 +13,11 @@ class EventController extends Controller
         $this->eventService = $eventService;
     }
 
+    public function index()
+    {
+        return $response = $this->eventService->index();
+    }
+
     public function create(Request $request)
     {
         $response = $this->eventService->storeEvent($request);

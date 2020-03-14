@@ -14,3 +14,5 @@ Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/user', fn () => Auth::user())->name('user');
 
 Route::post('/event/create', 'EventController@create')->name('event.create');
+
+Route::get('/event', 'EventController@index')->name('event.index');
